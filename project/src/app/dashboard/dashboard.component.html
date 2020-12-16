@@ -1,5 +1,20 @@
-<div>
+<nav>
+<ul>
+
+<li><a [routerLink]="['../january']">Form</a></li>
+<li><a  (click) = "logout()" >Logout</a></li>
+
+</ul>
+</nav>
+<p>Select the month:</p>
+<div class="center">
+
+  <label for="a">Enter the month:</label>
+
+  <input type="text" placeholder="Enter Month" #month/>
+
+<button (click)="onNavigate(month.value)">submit</button>
 </div>
 
 
-<button (click) = "logout()"><a [routerLink]="['Login']">Logout</a></button>
+

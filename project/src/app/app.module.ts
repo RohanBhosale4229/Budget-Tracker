@@ -10,6 +10,30 @@ import { LoginComponent } from './login/login.component';
 import { AngularFireModule } from '@angular/fire';
 import { FirebaseService } from './services/firebase.service';
 import { JanuaryComponent } from './january/january.component';
+import { FebruaryComponent } from './february/february.component';
+import { MarchComponent } from './march/march.component';
+import { AprilComponent } from './april/april.component';
+import { MayComponent } from './may/may.component';
+import { JuneComponent } from './june/june.component';
+import { JulyComponent } from './july/july.component';
+import { AugustComponent } from './august/august.component';
+import { SeptemberComponent } from './september/september.component';
+import { OctoberComponent } from './october/october.component';
+import { NovemberComponent } from './november/november.component';
+import { DecemberComponent } from './december/december.component';
+import { AddjanComponent } from './addjan/addjan.component';
+import { AddfebComponent } from './addfeb/addfeb.component';
+import { AddmarComponent } from './addmar/addmar.component';
+import { AddaprComponent } from './addapr/addapr.component';
+import { AddmayComponent } from './addmay/addmay.component';
+import { AddjunComponent } from './addjun/addjun.component';
+import { AddjulComponent } from './addjul/addjul.component';
+import { AddaugComponent } from './addaug/addaug.component';
+import { AddseptComponent } from './addsept/addsept.component';
+import { AddoctComponent } from './addoct/addoct.component';
+import { AddnovComponent } from './addnov/addnov.component';
+import { AdddecComponent } from './adddec/adddec.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,10 +43,34 @@ import { JanuaryComponent } from './january/january.component';
     HomepageComponent,
     RegisterComponent,
     LoginComponent,
-    JanuaryComponent
+    JanuaryComponent,
+    FebruaryComponent,
+    MarchComponent,
+    AprilComponent,
+    MayComponent,
+    JuneComponent,
+    JulyComponent,
+    AugustComponent,
+    SeptemberComponent,
+    OctoberComponent,
+    NovemberComponent,
+    DecemberComponent,
+    AddjanComponent,
+    AddfebComponent,
+    AddmarComponent,
+    AddaprComponent,
+    AddmayComponent,
+    AddjunComponent,
+    AddjulComponent,
+    AddaugComponent,
+    AddseptComponent,
+    AddoctComponent,
+    AddnovComponent,
+    AdddecComponent,
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     AngularFireModule.initializeApp({
       apiKey: "AIzaSyBFWjUzZcnA8BQuST3agPX4990JGyAHFjs",

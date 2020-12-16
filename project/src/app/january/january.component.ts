@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { JanService } from '../services/jan.service';
 import { model } from '../model';
-import { Observable } from 'rxjs';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore } from "@angular/fire/firestore"
 
 @Component({
   selector: 'app-january',
@@ -10,22 +8,33 @@ import { AngularFirestore } from "@angular/fire/firestore"
   styleUrls: ['./january.component.css']
 })
 export class JanuaryComponent implements OnInit {
-  _db:AngularFirestore;
+  january!: model[];
+  editState: boolean = false;
+  janToEdit!: model | null;
 
-  budgets: Observable<any[]>
-  constructor(public afAuth: AngularFireAuth, db: AngularFirestore)  {
-    this.afAuth.signInWithCredential;
-    this.budgets = db.collection('january').valueChanges();
-    this._db = db;
-
-  }
+  constructor(private januaryService: JanService) {}
 
   ngOnInit(): void {
+    //let january = [this.jan.title,this.jan.value]
+    this.januaryService.getJanuary().subscribe(january =>{
+      //console.log(january);
+      this.january = january;
+    })
   }
-
-  addbudget(n: string, b: number, u: number){
-    let jan = this._db.collection<model>('january');
-    jan.add({Name: n, budget: b, used: u });
+  deleteJanuary(event: any, j: model){
+    this.januaryService.deleteJanuary(j);
+    this.clearState();
   }
-
+  editJanuary(event: any, j: model){
+    this.editState = true;
+    this.janToEdit = j;
+  }
+  clearState(){
+    this.editState = false;
+    this.janToEdit = null;
+  }
+  updateJanuary(j: model){
+    this.januaryService.updateJanuary(j);
+    this.clearState();
+  }
 }

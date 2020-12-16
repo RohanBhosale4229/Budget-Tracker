@@ -1,3 +1,5 @@
+
+
 <div *ngIf="!isSignedIn" class="hero">
   <div class="container">
  <label for="uname"><b>Username</b></label>
@@ -7,10 +9,11 @@
  <input type="password" #password/>
 
  <button (click)="onSignin(email.value,password.value)">Sign In</button>
+
 </div>
 
 <div class="container" style="background-color:#f1f1f1">
- <button type="button" class="cancelbtn">Cancel</button>
+
 </div>
 </div>
 <app-dashboard *ngIf="isSignedIn" (isLogout)="handleLogout()"></app-dashboard>

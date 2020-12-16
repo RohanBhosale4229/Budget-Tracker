@@ -8,9 +8,5 @@
 
     <button (click)="onSignup(emailSignup.value,passwordSignup.value)">Sign Up</button>
   </div>
-
-  <div class="container" style="background-color:#f1f1f1">
-    <button type="button" class="cancelbtn">Cancel</button>
-  </div>
 </div>
-<app-dashboard *ngIf="isSignedIn" (isLogout)="handleLogout()"></app-dashboard>
+<app-january *ngIf="isSignedIn" (isLogout)="handleLogout()"></app-january>

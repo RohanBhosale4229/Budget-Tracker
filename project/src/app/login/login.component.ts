@@ -7,6 +7,7 @@ import { FirebaseService } from '../services/firebase.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+
   isSignedIn = false
   constructor(public firebaseService: FirebaseService, public router: Router) {
   }

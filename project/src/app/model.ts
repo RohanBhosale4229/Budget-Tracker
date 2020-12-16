@@ -1,5 +1,6 @@
 export interface model{
-  Name: string;
-  budget: number;
-  used : number;
+
+  id?: string
+  title?: string;
+  value?: number;
 }
