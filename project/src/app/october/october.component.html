@@ -2,7 +2,7 @@
   <ul *ngFor="let j of october" class="collection">
     <li class="collection-j"><strong>{{j.title}}: </strong>{{j.value}} <a
       class="secondary-content">
-      <i (click)="editOctober($event, j)" class="fa fa-pencil"></i>
+      <button mat-button  (click)="editOctober($event, j)" mat-flat-button color="primary">Edit</button>
       <i *ngIf="editState && octToEdit.id == j.id" (click)="clearState()" class="fa fa-compress"></i>
     </a>
 
@@ -15,13 +15,25 @@
           <div class="input-field col s6">
             <input type="text" placeholder="Add Value" [(ngModel)]="j.value" name = "value">
           </div>
-          <input type="submit" value="Update" class="btn orange">
-          <button (click)="deleteOctober($event, j)" class="btn red">Delete</button>
+          <button mat-button (click)="updateOctober(j)" mat-flat-button color="primary">update</button>
+          <button mat-button (click)="deleteOctober($event, j)" class="btn red">Delete</button>
         </div>
         </form>
     </div>
   </li>
   </ul>
+
+  <div class="row">
+    <div class="column">
+    <canvas id="myChart" width="180" height="250"></canvas>
+  </div>
+  <div class="column">
+    <canvas id="myChart1" width="180" height="250"></canvas>
+  </div>
+  <div class="column">
+    <canvas id="myChart2"  width="180" height="250" chart-options="options"></canvas>
+  </div>
+
 </div>
 <ng-template #noOctober>
   <hr>

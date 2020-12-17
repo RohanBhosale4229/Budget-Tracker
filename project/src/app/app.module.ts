@@ -34,6 +34,14 @@ import { AddoctComponent } from './addoct/addoct.component';
 import { AddnovComponent } from './addnov/addnov.component';
 import { AdddecComponent } from './adddec/adddec.component';
 import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MatTableModule } from '@angular/material/table';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+
 
 @NgModule({
   declarations: [
@@ -67,10 +75,19 @@ import { FormsModule } from '@angular/forms';
     AddoctComponent,
     AddnovComponent,
     AdddecComponent,
+
+
   ],
   imports: [
     BrowserModule,
     FormsModule,
+
+    MatTableModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatInputModule,
     AppRoutingModule,
     AngularFireModule.initializeApp({
       apiKey: "AIzaSyBFWjUzZcnA8BQuST3agPX4990JGyAHFjs",
@@ -80,7 +97,8 @@ import { FormsModule } from '@angular/forms';
     storageBucket: "nbad-project.appspot.com",
     messagingSenderId: "643717293629",
     appId: "1:643717293629:web:96bb1eb9cc2510ed59ec54"
-    })
+    }),
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

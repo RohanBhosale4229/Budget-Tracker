@@ -1,19 +1,22 @@
-<div class="card">
-  <div class="card-content">
+
+<div >
+
     <span class="card-title">Add</span>
-    <form (ngSubmit)="onSubmit()" class="col s6">
-      <div class="row">
-        <div class="input-field col s6">
-          <input type="text" placeholder="Add Title" [(ngModel)]="march.title" name = "title">
+    <form (ngSubmit)="onSubmit()" >
+
           <label>Title</label>
-        </div>
-        <div class="input-field col s6">
-          <input type="text" placeholder="Add Value" [(ngModel)]="march.value" name = "value">
+          <input type="text" placeholder="Add Title" [(ngModel)]="march.title" name = "title">
+
+        <div >
+
           <label>Value</label>
+          <input type="text" placeholder="Add Value" [(ngModel)]="march.value" name = "value">
+
         </div>
+
         <input type="submit" value="Submit" class="btn">
-      </div>
+
     </form>
-  </div>
+
 </div>
 <app-march></app-march>

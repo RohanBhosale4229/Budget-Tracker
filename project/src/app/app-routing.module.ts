@@ -18,6 +18,18 @@ import { OctoberComponent } from './october/october.component';
 import { NovemberComponent } from './november/november.component';
 import { DecemberComponent } from './december/december.component';
 import { RegisterComponent } from './register/register.component';
+import { AddjanComponent } from './addjan/addjan.component';
+import { AddfebComponent } from './addfeb/addfeb.component';
+import { AddmarComponent } from './addmar/addmar.component';
+import { AddaprComponent } from './addapr/addapr.component';
+import { AddmayComponent } from './addmay/addmay.component';
+import { AddjunComponent } from './addjun/addjun.component';
+import { AddjulComponent } from './addjul/addjul.component';
+import { AddaugComponent } from './addaug/addaug.component';
+import { AddseptComponent } from './addsept/addsept.component';
+import { AddoctComponent } from './addoct/addoct.component';
+import { AddnovComponent } from './addnov/addnov.component';
+import { AdddecComponent } from './adddec/adddec.component';
 
 const routes: Routes = [
   {
@@ -39,51 +51,51 @@ const routes: Routes = [
   },
   {
     path:'january',
-    component:JanuaryComponent
+    component:AddjanComponent
   },
   {
     path:'february',
-    component:FebruaryComponent
+    component:AddfebComponent
   },
   {
     path:'march',
-    component:MarchComponent
+    component:AddmarComponent
   },
   {
     path:'april',
-    component:AprilComponent
+    component:AddaprComponent
   },
   {
     path:'may',
-    component:MayComponent
+    component:AddmayComponent
   },
   {
     path:'june',
-    component:JuneComponent
+    component:AddjunComponent
   },
   {
     path:'july',
-    component:JulyComponent
+    component:AddjulComponent
   },
   {
     path:'august',
-    component:AugustComponent
+    component:AddaugComponent
   },
   {
     path:'september',
-    component:SeptemberComponent
+    component:AddseptComponent
   },
   {
     path:'october',
-    component:OctoberComponent
+    component:AddnovComponent
   },
   {
     path:'november',
-    component:NovemberComponent
+    component:AddnovComponent
   },
   {
     path:'december',
-    component:DecemberComponent
+    component:AdddecComponent
   }
 ];
 @NgModule({

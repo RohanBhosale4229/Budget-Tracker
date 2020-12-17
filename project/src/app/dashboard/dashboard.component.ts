@@ -12,7 +12,18 @@ export class DashboardComponent implements OnInit {
 
   constructor(public firebaseService: FirebaseService, public router: Router) { }
   ngOnInit(): void {
-
+      setTimeout(() => {
+        if (confirm('click OK to be logged in')){
+          location.reload();
+        }
+        else{
+          setTimeout(() =>{
+            this.firebaseService.logout()
+            this.isLogout.emit()
+            this.router.navigate([''])
+          }, 20000);
+        }
+      }, 40000)
   }
 
 
