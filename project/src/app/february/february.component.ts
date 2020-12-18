@@ -31,10 +31,17 @@ export class FebruaryComponent implements OnInit {
   constructor(private februaryService: FebService) {}
 
   ngOnInit(): void {
-    //let february = [this.feb.title,this.feb.value]
+    let current_user: model[]=[];
     this.februaryService.getFebruary().subscribe(february =>{
       //console.log(february);
       this.february = february;
+      for(let i =0; i< this.february.length;i++){
+        if(this.february[i].id===localStorage.getItem('userid')){
+          current_user.push(this.february[i])
+        }
+      }
+      this.february=current_user;
+      current_user=[]
       this.getBudget();
       setTimeout(() => {
         this.createPie();
@@ -53,6 +60,7 @@ export class FebruaryComponent implements OnInit {
   deleteFebruary(event: any, j: model){
     this.februaryService.deleteFebruary(j);
     this.clearState();
+    
   }
   editFebruary(event: any, j: model){
     this.editState = true;
@@ -85,8 +93,15 @@ export class FebruaryComponent implements OnInit {
           type: 'bar',
           data: this.dataSource,
           options: {
-            legend: {
-              display: false
+
+            scales: {
+              xAxes:[{
+                stacked:true
+              }],
+              yAxes: [
+                {
+                  stacked:true
+                }]
             }
           }
       });

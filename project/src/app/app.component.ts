@@ -8,4 +8,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'project';
+  public localStorageItem(id: string): string {
+    return localStorage.getItem('user');
+}
 }

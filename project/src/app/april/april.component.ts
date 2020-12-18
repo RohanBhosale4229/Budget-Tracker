@@ -32,10 +32,17 @@ export class AprilComponent implements OnInit {
   constructor(private aprilService: AprService) {}
 
   ngOnInit(): void {
-    //let april = [this.apr.title,this.apr.value]
+    let current_user: model[]=[];
     this.aprilService.getApril().subscribe(april =>{
-      //console.log(april);
+
       this.april = april;
+      for (let i=0; i<this.april.length;i++){
+        if(this.april[i].id===localStorage.getItem['userid']){
+          current_user.push(this.april[i]);
+        }
+      }
+      this.april=current_user;
+      current_user=[];
       this.getBudget();
       setTimeout(() => {
         this.createPie();
@@ -55,6 +62,7 @@ export class AprilComponent implements OnInit {
   deleteApril(event: any, j: model){
     this.aprilService.deleteApril(j);
     this.clearState();
+
   }
   editApril(event: any, j: model){
     this.editState = true;
@@ -87,8 +95,15 @@ export class AprilComponent implements OnInit {
           type: 'bar',
           data: this.dataSource,
           options: {
-            legend: {
-              display: false
+
+            scales: {
+              xAxes:[{
+                stacked:true
+              }],
+              yAxes: [
+                {
+                  stacked:true
+                }]
             }
           }
       });

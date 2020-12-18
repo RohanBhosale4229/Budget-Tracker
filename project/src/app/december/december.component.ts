@@ -31,10 +31,16 @@ export class DecemberComponent implements OnInit {
   constructor(private decemberService: DecService) {}
 
   ngOnInit(): void {
-    //let december = [this.dec.title,this.dec.value]
+    let current_user: model[]=[];
     this.decemberService.getDecember().subscribe(december =>{
-      //console.log(december);
       this.december = december;
+      for(let i =0; i< this.december.length;i++){
+        if(this.december[i].id===localStorage.getItem('userid')){
+          current_user.push(this.december[i])
+        }
+      }
+      this.december=current_user;
+      current_user=[]
       this.getBudget();
       setTimeout(() => {
         this.createPie();
@@ -53,6 +59,7 @@ export class DecemberComponent implements OnInit {
   deleteDecember(event: any, j: model){
     this.decemberService.deleteDecember(j);
     this.clearState();
+    
   }
   editDecember(event: any, j: model){
     this.editState = true;
@@ -85,8 +92,15 @@ export class DecemberComponent implements OnInit {
           type: 'bar',
           data: this.dataSource,
           options: {
-            legend: {
-              display: false
+
+            scales: {
+              xAxes:[{
+                stacked:true
+              }],
+              yAxes: [
+                {
+                  stacked:true
+                }]
             }
           }
       });

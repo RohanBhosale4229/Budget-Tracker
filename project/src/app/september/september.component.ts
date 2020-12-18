@@ -31,10 +31,17 @@ export class SeptemberComponent implements OnInit {
   constructor(private septemberService: SeptService) {}
 
   ngOnInit(): void {
-    //let september = [this.sep.title,this.sep.value]
+    let current_user: model[]=[];
     this.septemberService.getSeptember().subscribe(september =>{
-      //console.log(september);
+
       this.september = september;
+      for(let i =0; i< this.september.length;i++){
+        if(this.september[i].id===localStorage.getItem('userid')){
+          current_user.push(this.september[i])
+        }
+      }
+      this.september=current_user;
+      current_user=[];
       this.getBudget();
       setTimeout(() => {
         this.createPie();
@@ -53,6 +60,7 @@ export class SeptemberComponent implements OnInit {
   deleteSeptember(event: any, j: model){
     this.septemberService.deleteSeptember(j);
     this.clearState();
+
   }
   editSeptember(event: any, j: model){
     this.editState = true;
@@ -86,8 +94,15 @@ export class SeptemberComponent implements OnInit {
           type: 'bar',
           data: this.dataSource,
           options: {
-            legend: {
-              display: false
+
+            scales: {
+              xAxes:[{
+                stacked:true
+              }],
+              yAxes: [
+                {
+                  stacked:true
+                }]
             }
           }
       });
@@ -105,12 +120,16 @@ export class SeptemberComponent implements OnInit {
                 display: false
               },
               scales: {
+                xAxes:[{
+                  stacked:true
+                }],
                 yAxes: [
                   {
                     id: 'y-axis-1',
                     type: 'linear',
                     display: true,
-                    position: 'left'
+                    position: 'left',
+                    stacked:true
                   }
                 ]
               },

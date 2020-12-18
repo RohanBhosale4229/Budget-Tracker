@@ -31,10 +31,17 @@ export class MayComponent implements OnInit {
   constructor(private mayService: MayService) {}
 
   ngOnInit(): void {
-    //let may = [this.may.title,this.may.value]
+    let current_user: model[]=[];
     this.mayService.getMay().subscribe(may =>{
       //console.log(may);
       this.may = may;
+      for(let i =0; i< this.may.length;i++){
+        if(this.may[i].id===localStorage.getItem('userid')){
+          current_user.push(this.may[i])
+        }
+      }
+      this.may=current_user;
+      current_user=[];
       this.getBudget();
       setTimeout(() => {
         this.createPie();
@@ -53,6 +60,7 @@ export class MayComponent implements OnInit {
   deleteMay(event: any, j: model){
     this.mayService.deleteMay(j);
     this.clearState();
+    
   }
   editMay(event: any, j: model){
     this.editState = true;
@@ -87,8 +95,15 @@ export class MayComponent implements OnInit {
           type: 'bar',
           data: this.dataSource,
           options: {
-            legend: {
-              display: false
+
+            scales: {
+              xAxes:[{
+                stacked:true
+              }],
+              yAxes: [
+                {
+                  stacked:true
+                }]
             }
           }
       });

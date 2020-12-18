@@ -18,14 +18,15 @@ export class LoginComponent implements OnInit {
     this.isSignedIn = false
   }
   async onSignin(email:string,password:string){
-    await this.firebaseService.signin(email,password)
+    await this.firebaseService.signin(email,password).then((result)=>{
+
     if(this.firebaseService.isLoggedIn){
     this.isSignedIn = true
     this.router.navigate(['/dashboard'])
   }
-    else
-    this.router.navigate(['/login'])
-
+}).catch((error)=>{
+  window.alert(error.message)
+})
 }
 handleLogout(){
   this.isSignedIn = false

@@ -30,10 +30,17 @@ export class JuneComponent implements OnInit {
   constructor(private juneService: JunService) {}
 
   ngOnInit(): void {
-    //let june = [this.jun.title,this.jun.value]
+    let current_user: model[]=[];
     this.juneService.getJune().subscribe(june =>{
       //console.log(june);
       this.june = june;
+      for(let i =0; i< this.june.length;i++){
+        if(this.june[i].id===localStorage.getItem('userid')){
+          current_user.push(this.june[i])
+        }
+      }
+      this.june=current_user;
+      current_user=[]
       this.getBudget();
       setTimeout(() => {
         this.createPie();
@@ -64,6 +71,7 @@ export class JuneComponent implements OnInit {
   updateJune(j: model){
     this.juneService.updateJune(j);
     this.clearState();
+    location.reload();
   }
 
 
@@ -86,8 +94,15 @@ export class JuneComponent implements OnInit {
           type: 'bar',
           data: this.dataSource,
           options: {
-            legend: {
-              display: false
+
+            scales: {
+              xAxes:[{
+                stacked:true
+              }],
+              yAxes: [
+                {
+                  stacked:true
+                }]
             }
           }
       });

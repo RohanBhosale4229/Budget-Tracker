@@ -7,6 +7,7 @@
     <input type="password" #passwordSignup/>
 
     <button (click)="onSignup(emailSignup.value,passwordSignup.value)">Sign Up</button>
+    <button [routerLink]="['../login']">login</button>
   </div>
 </div>
 <app-january *ngIf="isSignedIn" (isLogout)="handleLogout()"></app-january>

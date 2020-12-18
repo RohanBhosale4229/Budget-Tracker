@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { AugService } from '../services/aug.service';
 import { model } from '../model';
+import { FirebaseService } from '../services/firebase.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-addaug',
@@ -8,11 +10,17 @@ import { model } from '../model';
   styleUrls: ['./addaug.component.css']
 })
 export class AddaugComponent implements OnInit {
+  @Output() isLogout = new EventEmitter<void>()
   august: model = {
+    id: localStorage.getItem('userid'),
     title:'',
     value:undefined
   }
-  constructor(private augustService: AugService) { }
+  constructor(public firebaseService: FirebaseService,public router: Router,private augustService: AugService) {
+    if (localStorage.getItem('user') ===null){
+      this.router.navigate([''])
+  }
+   }
 
   ngOnInit(): void {
   }
@@ -24,5 +32,10 @@ export class AddaugComponent implements OnInit {
     }
 
   }
+  logout(){
+    this.firebaseService.logout()
+    this.isLogout.emit()
+    this.router.navigate([''])
 
+}
 }

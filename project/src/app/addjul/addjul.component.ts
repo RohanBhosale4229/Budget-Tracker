@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { JulService } from '../services/jul.service';
 import { model } from '../model';
+import { FirebaseService } from '../services/firebase.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-addjul',
@@ -9,11 +11,16 @@ import { model } from '../model';
 })
 export class AddjulComponent implements OnInit {
   july: model = {
+    id: localStorage.getItem('userid'),
     title:'',
     value:undefined
   }
-  constructor(private julyService: JulService) { }
-
+  constructor(public firebaseService: FirebaseService,public router: Router,private julyService: JulService) {
+    if (localStorage.getItem('user') ===null){
+      this.router.navigate([''])
+  }
+   }
+  @Output() isLogout = new EventEmitter<void>()
   ngOnInit(): void {
   }
   onSubmit(){
@@ -24,5 +31,12 @@ export class AddjulComponent implements OnInit {
     }
 
   }
+
+  logout(){
+    this.firebaseService.logout()
+    this.isLogout.emit()
+    this.router.navigate([''])
+
+}
 
 }

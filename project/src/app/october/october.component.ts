@@ -31,10 +31,17 @@ export class OctoberComponent implements OnInit {
   constructor(private octoberService: OctService) {}
 
   ngOnInit(): void {
-    //let october = [this.oct.title,this.oct.value]
+    let current_user: model[]=[];
     this.octoberService.getOctober().subscribe(october =>{
-      //console.log(october);
+
       this.october = october;
+      for(let i =0; i< this.october.length;i++){
+        if(this.october[i].id===localStorage.getItem('userid')){
+          current_user.push(this.october[i])
+        }
+      }
+      this.october=current_user;
+      current_user=[];
       this.getBudget();
       setTimeout(() => {
         this.createPie();
@@ -53,6 +60,7 @@ export class OctoberComponent implements OnInit {
   deleteOctober(event: any, j: model){
     this.octoberService.deleteOctober(j);
     this.clearState();
+    
   }
   editOctober(event: any, j: model){
     this.editState = true;
@@ -85,8 +93,15 @@ export class OctoberComponent implements OnInit {
           type: 'bar',
           data: this.dataSource,
           options: {
-            legend: {
-              display: false
+
+            scales: {
+              xAxes:[{
+                stacked:true
+              }],
+              yAxes: [
+                {
+                  stacked:true
+                }]
             }
           }
       });

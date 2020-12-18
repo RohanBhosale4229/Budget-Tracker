@@ -10,20 +10,25 @@ import { Router } from '@angular/router';
 export class DashboardComponent implements OnInit {
   @Output() isLogout = new EventEmitter<void>()
 
-  constructor(public firebaseService: FirebaseService, public router: Router) { }
+  constructor(public firebaseService: FirebaseService, public router: Router) {
+    if (localStorage.getItem('user') ===null){
+      this.router.navigate([''])
+    }
+   }
   ngOnInit(): void {
-      setTimeout(() => {
-        if (confirm('click OK to be logged in')){
-          location.reload();
-        }
-        else{
-          setTimeout(() =>{
-            this.firebaseService.logout()
-            this.isLogout.emit()
-            this.router.navigate([''])
-          }, 20000);
-        }
-      }, 40000)
+
+      // setTimeout(() => {
+      //   if (confirm('click OK to be logged in')){
+      //     location.reload();
+      //   }
+      //   else{
+      //     setTimeout(() =>{
+      //       this.firebaseService.logout()
+      //       this.isLogout.emit()
+      //       this.router.navigate([''])
+      //     }, 20000);
+      //   }
+      // }, 40000)
   }
 
 

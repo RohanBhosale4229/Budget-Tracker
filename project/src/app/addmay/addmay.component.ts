@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { MayService } from '../services/may.service';
 import { model } from '../model';
+import { FirebaseService } from '../services/firebase.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-addmay',
@@ -9,11 +11,16 @@ import { model } from '../model';
 })
 export class AddmayComponent implements OnInit {
   may: model = {
+    id: localStorage.getItem('userid'),
     title:'',
     value:undefined
   }
-  constructor(private mayService: MayService) { }
-
+  constructor(public firebaseService: FirebaseService,public router: Router,private mayService: MayService) {
+     if (localStorage.getItem('user') ===null){
+    this.router.navigate([''])
+}
+ }
+  @Output() isLogout = new EventEmitter<void>()
   ngOnInit(): void {
   }
   onSubmit(){
@@ -24,5 +31,11 @@ export class AddmayComponent implements OnInit {
     }
 
   }
+  logout(){
+    this.firebaseService.logout()
+    this.isLogout.emit()
+    this.router.navigate([''])
+
+}
 
 }

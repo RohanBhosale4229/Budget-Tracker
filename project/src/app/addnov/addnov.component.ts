@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { NovService } from '../services/nov.service';
 import { model } from '../model';
+import { FirebaseService } from '../services/firebase.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -10,11 +12,16 @@ import { model } from '../model';
 })
 export class AddnovComponent implements OnInit {
   november: model = {
+    id: localStorage.getItem('userid'),
     title:'',
     value:undefined
   }
-  constructor(private novemberService: NovService) { }
-
+  constructor(public firebaseService: FirebaseService,public router: Router,private novemberService: NovService) {
+    if (localStorage.getItem('user') ===null){
+      this.router.navigate([''])
+  }
+  }
+  @Output() isLogout = new EventEmitter<void>()
   ngOnInit(): void {
   }
   onSubmit(){
@@ -25,5 +32,11 @@ export class AddnovComponent implements OnInit {
     }
 
   }
+  logout(){
+    this.firebaseService.logout()
+    this.isLogout.emit()
+    this.router.navigate([''])
+
+}
 
 }

@@ -33,10 +33,17 @@ export class MarchComponent implements OnInit {
   constructor(private marchService: MarService) {}
 
   ngOnInit(): void {
-    //let march = [this.mar.title,this.mar.value]
+    let current_user: model[]=[];
     this.marchService.getMarch().subscribe(march =>{
-      //console.log(march);
+
       this.march = march;
+      for(let i =0; i< this.march.length;i++){
+        if(this.march[i].id===localStorage.getItem('userid')){
+          current_user.push(this.march[i])
+        }
+      }
+      this.march=current_user;
+      current_user=[]
       this.getBudget();
       setTimeout(() => {
         this.createPie();
@@ -47,15 +54,18 @@ export class MarchComponent implements OnInit {
     }
     getBudget(){
       for (let i = 0; i < this.march.length; i++){
+
         this.dataSource.datasets[0].data[i] = this.march[i].value;
         this.dataSource.labels[i] = this.march[i].title;
         this.dataSource.datasets[0].backgroundColor[i] = this.randomColors();
-      }
+
+    }
     }
 
   deleteMarch(event: any, j: model){
     this.marchService.deleteMarch(j);
     this.clearState();
+    
   }
   editMarch(event: any, j: model){
     this.editState = true;
@@ -88,8 +98,15 @@ export class MarchComponent implements OnInit {
           type: 'bar',
           data: this.dataSource,
           options: {
-            legend: {
-              display: false
+
+            scales: {
+              xAxes:[{
+                stacked:true
+              }],
+              yAxes: [
+                {
+                  stacked:true
+                }]
             }
           }
       });

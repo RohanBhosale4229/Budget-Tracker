@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { DecService } from '../services/dec.service';
 import { model } from '../model';
-
+import { FirebaseService } from '../services/firebase.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-adddec',
@@ -10,11 +11,16 @@ import { model } from '../model';
 })
 export class AdddecComponent implements OnInit {
   december: model = {
+    id: localStorage.getItem('userid'),
     title:'',
     value:undefined
   }
-  constructor(private decemberService: DecService) { }
-
+  constructor(public firebaseService: FirebaseService,public router: Router,private decemberService: DecService) {
+    if (localStorage.getItem('user') ===null){
+      this.router.navigate([''])
+  }
+   }
+  @Output() isLogout = new EventEmitter<void>()
   ngOnInit(): void {
   }
   onSubmit(){
@@ -25,5 +31,11 @@ export class AdddecComponent implements OnInit {
     }
 
   }
+  logout(){
+    this.firebaseService.logout()
+    this.isLogout.emit()
+    this.router.navigate([''])
+
+}
 
 }

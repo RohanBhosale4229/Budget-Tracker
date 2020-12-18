@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { OctService } from '../services/oct.service';
 import { model } from '../model';
+import { FirebaseService } from '../services/firebase.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-addoct',
@@ -9,11 +12,16 @@ import { model } from '../model';
 })
 export class AddoctComponent implements OnInit {
   october: model = {
+    id: localStorage.getItem('userid'),
     title:'',
     value:undefined
   }
-  constructor(private octoberService: OctService) { }
-
+  constructor(public firebaseService: FirebaseService,public router: Router,private octoberService: OctService) {
+    if (localStorage.getItem('user') ===null){
+      this.router.navigate([''])
+  }
+  }
+  @Output() isLogout = new EventEmitter<void>()
   ngOnInit(): void {
   }
   onSubmit(){
@@ -24,5 +32,11 @@ export class AddoctComponent implements OnInit {
     }
 
   }
+  logout(){
+    this.firebaseService.logout()
+    this.isLogout.emit()
+    this.router.navigate([''])
+
+}
 
 }

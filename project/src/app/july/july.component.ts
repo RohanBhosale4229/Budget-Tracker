@@ -32,10 +32,17 @@ export class JulyComponent implements OnInit {
   constructor(private julyService: JulService) {}
 
   ngOnInit(): void {
-    //let july = [this.jul.title,this.jul.value]
+    let current_user: model[]=[];
     this.julyService.getJuly().subscribe(july =>{
-      //console.log(july);
+
       this.july = july;
+      for(let i =0; i< this.july.length;i++){
+        if(this.july[i].id===localStorage.getItem('userid')){
+          current_user.push(this.july[i])
+        }
+      }
+      this.july=current_user;
+      current_user=[]
       this.getBudget();
       setTimeout(() => {
         this.createPie();
@@ -54,6 +61,7 @@ export class JulyComponent implements OnInit {
   deleteJuly(event: any, j: model){
     this.julyService.deleteJuly(j);
     this.clearState();
+    
   }
   editJuly(event: any, j: model){
     this.editState = true;
@@ -87,8 +95,15 @@ export class JulyComponent implements OnInit {
           type: 'bar',
           data: this.dataSource,
           options: {
-            legend: {
-              display: false
+
+            scales: {
+              xAxes:[{
+                stacked:true
+              }],
+              yAxes: [
+                {
+                  stacked:true
+                }]
             }
           }
       });

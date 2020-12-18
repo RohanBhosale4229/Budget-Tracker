@@ -18,13 +18,14 @@ export class RegisterComponent implements OnInit {
     this.isSignedIn = false
   }
   async onSignup(email:string,password:string){
-    await this.firebaseService.signup(email,password)
+    await this.firebaseService.signup(email,password).then((result)=>{
     if(this.firebaseService.isLoggedIn){
     this.isSignedIn = true
     this.router.navigate(['/dashboard'])
   }
-    else
-    this.router.navigate(['/register'])
+}).catch((error)=>{
+  window.alert(error.message)
+})
   }
   handleLogout(){
     this.isSignedIn = false

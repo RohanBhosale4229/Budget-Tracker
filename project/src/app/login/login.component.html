@@ -9,7 +9,7 @@
  <input type="password" #password/>
 
  <button (click)="onSignin(email.value,password.value)">Sign In</button>
-
+<button [routerLink]="['../register']">Register</button>
 </div>
 
 <div class="container" style="background-color:#f1f1f1">

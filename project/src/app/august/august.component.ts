@@ -32,10 +32,16 @@ export class AugustComponent implements OnInit {
   constructor(private augustService: AugService) {}
 
   ngOnInit(): void {
-    //let august = [this.aug.title,this.aug.value]
+    let current_user: model[]=[];
     this.augustService.getAugust().subscribe(august =>{
-      //console.log(august);
       this.august = august;
+      for (let i =0; i<this.august.length;i++){
+        if(this.august[i].id===localStorage.getItem('user')){
+          current_user.push(this.august[i])
+        }
+      }
+      this.august=current_user;
+      current_user=[];
       this.getBudget();
       setTimeout(() => {
         this.createPie();
@@ -54,6 +60,7 @@ export class AugustComponent implements OnInit {
   deleteAugust(event: any, j: model){
     this.augustService.deleteAugust(j);
     this.clearState();
+    
   }
   editAugust(event: any, j: model){
     this.editState = true;
@@ -86,8 +93,15 @@ export class AugustComponent implements OnInit {
           type: 'bar',
           data: this.dataSource,
           options: {
-            legend: {
-              display: false
+
+            scales: {
+              xAxes:[{
+                stacked:true
+              }],
+              yAxes: [
+                {
+                  stacked:true
+                }]
             }
           }
       });

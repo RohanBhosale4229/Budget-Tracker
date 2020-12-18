@@ -33,10 +33,17 @@ export class NovemberComponent implements OnInit {
   constructor(private novemberService: NovService) {}
 
   ngOnInit(): void {
-    //let november = [this.nov.title,this.nov.value]
+    let current_user: model[]=[];
     this.novemberService.getNovember().subscribe(november =>{
-      //console.log(november);
+
       this.november = november;
+      for(let i =0; i< this.november.length;i++){
+        if(this.november[i].id===localStorage.getItem('userid')){
+          current_user.push(this.november[i])
+        }
+      }
+      this.november=current_user;
+      current_user=[];
       this.getBudget();
       setTimeout(() => {
         this.createPie();
@@ -55,6 +62,7 @@ export class NovemberComponent implements OnInit {
   deleteNovember(event: any, j: model){
     this.novemberService.deleteNovember(j);
     this.clearState();
+    
   }
   editNovember(event: any, j: model){
     this.editState = true;
@@ -88,8 +96,15 @@ export class NovemberComponent implements OnInit {
           type: 'bar',
           data: this.dataSource,
           options: {
-            legend: {
-              display: false
+
+            scales: {
+              xAxes:[{
+                stacked:true
+              }],
+              yAxes: [
+                {
+                  stacked:true
+                }]
             }
           }
       });

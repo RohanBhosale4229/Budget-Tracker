@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { MarService } from '../services/mar.service';
 import { model } from '../model';
+import { FirebaseService } from '../services/firebase.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-addmar',
@@ -9,11 +11,16 @@ import { model } from '../model';
 })
 export class AddmarComponent implements OnInit {
   march: model = {
+    id: localStorage.getItem('userid'),
     title:'',
     value:undefined
   }
-  constructor(private marchService: MarService) { }
-
+  constructor(public firebaseService: FirebaseService,public router: Router,private marchService: MarService) {
+    if (localStorage.getItem('user') ===null){
+      this.router.navigate([''])
+  }
+   }
+  @Output() isLogout = new EventEmitter<void>()
   ngOnInit(): void {
   }
   onSubmit(){
@@ -24,5 +31,10 @@ export class AddmarComponent implements OnInit {
     }
 
   }
+  logout(){
+    this.firebaseService.logout()
+    this.isLogout.emit()
+    this.router.navigate([''])
 
+}
 }

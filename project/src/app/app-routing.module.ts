@@ -96,7 +96,8 @@ const routes: Routes = [
   {
     path:'december',
     component:AdddecComponent
-  }
+  },
+
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
