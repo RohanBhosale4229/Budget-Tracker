@@ -88,13 +88,13 @@ import { MatButtonModule } from '@angular/material/button';
     MatInputModule,
     AppRoutingModule,
     AngularFireModule.initializeApp({
-      apiKey: "AIzaSyBFWjUzZcnA8BQuST3agPX4990JGyAHFjs",
-    authDomain: "nbad-project.firebaseapp.com",
-    databaseURL: "https://nbad-project-default-rtdb.firebaseio.com",
-    projectId: "nbad-project",
-    storageBucket: "nbad-project.appspot.com",
-    messagingSenderId: "643717293629",
-    appId: "1:643717293629:web:96bb1eb9cc2510ed59ec54"
+      apiKey: ,
+    authDomain: ,
+    databaseURL: ,
+    projectId: ,
+    storageBucket: ,
+    messagingSenderId: ,
+    appId: 
     }),
     BrowserAnimationsModule
   ],
