@@ -6,6 +6,10 @@ export class AppPage {
   }
 
   getTitleText(): Promise<string> {
-    return element(by.css('app-root .content span')).getText() as Promise<string>;
+    return element(by.css('app-homepage a')).getText() as Promise<string>;
+  }
+  getopenelement(){
+    return element(by.partialLinkText('Home'));
+
   }
 }
